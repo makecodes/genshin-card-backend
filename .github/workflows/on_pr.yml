@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: "Build:dockerimage"
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
           registry: ghcr.io
           username: imakecodes
