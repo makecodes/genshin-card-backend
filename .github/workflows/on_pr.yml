@@ -17,4 +17,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           github-token: ${{ secrets.DOCKER_PASSWORD }}
-          tags: dev
+          tags: makecodes/genshin-card-backend:dev
