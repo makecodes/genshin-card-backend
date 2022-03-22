@@ -1,0 +1,32 @@
+version: "3"
+services:
+  app:
+    build: .
+    container_name: gc-app-${SCOPE}
+    volumes:
+      - .:/home/makecodes
+      - ./media:/home/makecodes/media
+    command: /home/makecodes/commands/run.sh
+    ports:
+      - ${APP_PORT}:8000
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=genshin
+      - DB_NAME=genshin
+    depends_on:
+      - mysql
+    links:
+      - mysql
+  mysql:
+    image: mysql:8
+    container_name: gc-mysql-${SCOPE}
+    command: --default-authentication-plugin=mysql_native_password
+    cap_add:
+      - SYS_NICE
+    environment:
+      - MYSQL_ROOT_PASSWORD=genshin
+      - MYSQL_DATABASE=genshin
