@@ -1,0 +1,23 @@
+name: Creates a docker image for production
+
+on:
+  push:
+    branches: [feature/*, fix/*]
+
+jobs:
+  PublishDockerDev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: "Build:dockerimage"
+        uses: docker/build-push-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: imakecodes/makecodes
+          tags: dev
