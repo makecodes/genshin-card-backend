@@ -1,0 +1,18 @@
+# Gemfury repo
+--extra-index-url https://repo.fury.io/${MC_FURY_AUTH}/imakecodes/
+
+django
+django-extensions
+django-json-widget
+django-minio-storage
+django-mysql
+django-storages
+djangorestframework
+djangorestframework-api-key
+minio
+pendulum
+pillow
+requests
+sentry-sdk
+sorl-thumbnail
+mysqlclient

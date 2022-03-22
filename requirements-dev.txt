@@ -1,0 +1,7 @@
+-r requirements.txt
+
+coverage
+blue
+flake8
+isort
+pre-commit
