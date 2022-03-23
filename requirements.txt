@@ -9,7 +9,6 @@ django-mysql
 django-storages
 djangorestframework
 djangorestframework-api-key
-minio
 pendulum
 pillow
 requests
