@@ -11,14 +11,14 @@ class UserAdmin(ImprovedModelAdmin):
         groups = []
         for group in obj.groups.all():
             groups.append(group.name)
-        return ','.join(groups)
+        return ",".join(groups)
 
-    search_fields = ('id', 'email', 'first_name', 'last_name')
+    search_fields = ("id", "email", "first_name", "last_name")
     list_display = (
-        'id',
-        'is_active',
-        'email',
-        'first_name',
-        'last_name',
-        'show_groups',
+        "id",
+        "is_active",
+        "email",
+        "first_name",
+        "last_name",
+        "show_groups",
     )

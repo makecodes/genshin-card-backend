@@ -9,62 +9,60 @@ from .managers import UserManager
 
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(
-        'E-mail', unique=True, help_text='E-mail do usuário'
-    )
+    email = models.EmailField("E-mail", unique=True, help_text="E-mail do usuário")
     first_name = models.CharField(
-        'Nome', max_length=30, blank=True, help_text='Primeiro nome'
+        "Nome", max_length=30, blank=True, help_text="Primeiro nome"
     )
     last_name = models.CharField(
-        'Sobrenome', max_length=30, blank=True, help_text='Nome de família'
+        "Sobrenome", max_length=30, blank=True, help_text="Nome de família"
     )
-    date_joined = models.DateTimeField('date joined', auto_now_add=True)
+    date_joined = models.DateTimeField("date joined", auto_now_add=True)
     is_active = models.BooleanField(
-        'Usuário ativo?',
+        "Usuário ativo?",
         default=True,
-        help_text='Indica se o usuário está ativo ou não',
+        help_text="Indica se o usuário está ativo ou não",
     )
     is_staff = models.BooleanField(
-        'Equipe?', default=True, help_text='Faz parte da equipe da loja?'
+        "Equipe?", default=True, help_text="Faz parte da equipe da loja?"
     )
     is_superuser = models.BooleanField(
-        'Adminstrador?',
+        "Adminstrador?",
         default=False,
-        help_text='É um administrador do sistema?',
+        help_text="É um administrador do sistema?",
     )
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     WRITE_FIELDS = [
-        'email',
-        'first_name',
-        'last_name',
-        'is_active',
-        'is_staff',
-        'is_superuser',
+        "email",
+        "first_name",
+        "last_name",
+        "is_active",
+        "is_staff",
+        "is_superuser",
     ]
 
     def get_full_name(self):
         """
         Returns the first_name plus the last_name, with a space in between.
         """
-        full_name = f'{self.first_name} {self.last_name}'
+        full_name = f"{self.first_name} {self.last_name}"
         return full_name.strip()
 
     def get_short_name(self):
         """
         Returns the short name for the user.
         """
-        return self.first_name or 'Sem'
+        return self.first_name or "Sem"
 
     @property
     def get_abbrv(self):
         try:
-            return f'{self.first_name[0]}{self.last_name[0]}'
+            return f"{self.first_name[0]}{self.last_name[0]}"
         except IndexError:
-            return 'SN'
+            return "SN"
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """
@@ -76,25 +74,25 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     def roles(self):
         roles = []
         if self.is_staff:
-            roles.append('STAFF')
+            roles.append("STAFF")
 
         if self.is_superuser:
-            roles.append('ADMIN')
+            roles.append("ADMIN")
 
         return roles
 
     def __repr__(self):
         cls = self.__class__.__name__
         fields = [
-            f'{field.name}={field.value_from_object(self)}'
+            f"{field.name}={field.value_from_object(self)}"
             for field in self._meta.fields
             if field.name
             not in [
-                'password',
-                'last_login',
-                'created_at',
-                'updated_at',
-                'date_joined',
+                "password",
+                "last_login",
+                "created_at",
+                "updated_at",
+                "date_joined",
             ]
             and field.value_from_object(self)
         ]
@@ -103,19 +101,19 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     @property
     def serialize(self):
         return {
-            'id': self.pk,
-            'email': self.email,
-            'first_name': self.first_name,
-            'last_name': self.last_name,
-            'date_joined': self.date_joined,
-            'active': self.is_active,
-            'name': self.get_full_name(),
-            'short_name': self.get_short_name(),
-            'abbrv': self.get_abbrv,
-            'roles': self.roles,
+            "id": self.pk,
+            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "date_joined": self.date_joined,
+            "active": self.is_active,
+            "name": self.get_full_name(),
+            "short_name": self.get_short_name(),
+            "abbrv": self.get_abbrv,
+            "roles": self.roles,
         }
 
     class Meta:
-        verbose_name = 'Usuário'
-        verbose_name_plural = 'Usuários'
-        db_table = 'users'
+        verbose_name = "Usuário"
+        verbose_name_plural = "Usuários"
+        db_table = "users"

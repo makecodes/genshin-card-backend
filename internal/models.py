@@ -45,7 +45,10 @@ class BaseModel(models.Model):
     def __repr__(self):
         cls = self.__class__.__name__
         fields = [
-            f"{field.name}={field.value_from_object(self)}" for field in self._meta.fields if field.name not in ["created_at", "updated_at"] and field.value_from_object(self)
+            f"{field.name}={field.value_from_object(self)}"
+            for field in self._meta.fields
+            if field.name not in ["created_at", "updated_at"]
+            and field.value_from_object(self)
         ]
         return f"<{cls} {','.join(fields)}>"
 
