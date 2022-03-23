@@ -19,7 +19,7 @@ jobs:
           SENTRY_ORG: make-codes
           SENTRY_PROJECT: genshin-card
       - name: "Build:dockerimage"
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v1
         with:
           registry: ghcr.io
           username: imakecodes
