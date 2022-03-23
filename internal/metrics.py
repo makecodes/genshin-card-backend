@@ -4,7 +4,9 @@ import newrelic.agent
 from datadog import initialize, statsd
 from django.conf import settings
 
-initialize(**{"statsd_host": settings.DATADOG_HOST, "statsd_port": settings.DATADOG_PORT})
+initialize(
+    **{"statsd_host": settings.DATADOG_HOST, "statsd_port": settings.DATADOG_PORT}
+)
 
 
 def _process_tags(tags):
