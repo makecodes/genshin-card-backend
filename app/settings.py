@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "storages",
     "core",
+    "game",
 ]
 
 MIDDLEWARE = [
