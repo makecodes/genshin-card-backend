@@ -1,0 +1,28 @@
+name: Creates a docker image for production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Create Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: make-codes
+          SENTRY_PROJECT: genshin-card
+      - name: "Build:dockerimage"
+        uses: docker/build-push-action@v1
+        with:
+          registry: ghcr.io
+          username: imakecodes
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: makecodes/genshin-card-backend
+          tags: latest
