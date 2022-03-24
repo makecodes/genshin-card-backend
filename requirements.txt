@@ -1,6 +1,7 @@
 # Gemfury repo
 --extra-index-url https://repo.fury.io/${MC_FURY_AUTH}/imakecodes/
 
+colorama
 django
 django-extensions
 django-json-widget
@@ -9,9 +10,10 @@ django-mysql
 django-storages
 djangorestframework
 djangorestframework-api-key
+GitPython
+mysqlclient
 pendulum
 pillow
 requests
 sentry-sdk
 sorl-thumbnail
-mysqlclient
